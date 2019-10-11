@@ -44,15 +44,15 @@ class AccountModel(AbstractModel):
                 cursor.execute(
                     """SELECT * FROM USERS WHERE username=? OR email=?""", (
                         username, email,)
-                )
+                )  # TODO: What if there's two users?
         elif username:
             cursor.execute(
-                """SELECT * FROM users WHERE username=? OR email=?""", (
-                    username, username,)
+                """SELECT * FROM users WHERE username=?""", (
+                    username,)
             )
         elif email:
             cursor.execute(
-                """SELECT * FROM users WHERE username=? OR email=?""", (email, email))
+                """SELECT * FROM users WHERE email=?""", (email,))
 
         results = cursor.fetchall()
 
@@ -121,3 +121,5 @@ class AccountModel(AbstractModel):
             return True, account
         except VerifyMismatchError:
             return False, account
+        finally:
+            return False, None

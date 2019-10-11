@@ -8,4 +8,4 @@ class AbstractModel():
         self._ensure_tables()
 
     def _ensure_tables(self):
-        pass
+        raise NotImplementedError()

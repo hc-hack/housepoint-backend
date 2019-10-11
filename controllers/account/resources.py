@@ -91,10 +91,10 @@ class AccountCreationResource(Resource):
             return False, "Invalid email"
 
         # Quick checks passed, check in DB for existing user
-        account_by_username = self.model.find_user(username=username)
-        account_by_email = self.model.find_user(email=email)
+        account = self.model.find_user(
+            username=username, email=email, exclusive=False)
 
-        if account_by_username or account_by_email:
+        if account:
             return False, "Account Exists"
         return True, None
 
