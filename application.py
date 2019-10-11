@@ -1,12 +1,24 @@
 from flask import Flask
+from controllers import register_routes
+from flask_restful import Api
 
-app = Flask(__name__)
 
+class HousepointApplication():
+    def __init__(self):
+        """ Initialise the application """
+        self.flask = Flask(__name__)
+        self.api = Api(self.flask)
+        self.register_controller()
 
-@app.route("/")
-def hello_world():
-    return "Hello!"
+    def register_controller(self):
+        """ Register the controllers each namespace """
+        register_routes(self.flask, self.api)
+
+    def run(self):
+        """ Run the flask app as debug """
+        self.flask.run(debug=True)
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app = HousepointApplication()
+    app.run()
