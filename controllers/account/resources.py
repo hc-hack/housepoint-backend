@@ -115,6 +115,7 @@ class AccountLoginResource(Resource):
             return {
                 "message": "Username and password is required in POST body"
             }, 400
+
         # TODO: Make a JWT!
         authenticated, account = self.model.authenticate(username, password)
         if authenticated:
