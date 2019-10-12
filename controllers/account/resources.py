@@ -7,11 +7,13 @@ from flask import Request
 from models.account import AccountModel
 import re
 
+_model = AccountModel()
+
 
 class AccountResource(Resource):
     def __init__(self):
         super().__init__()
-        self.model = AccountModel()
+        self.model = _model
 
     # TODO: Authentication on this endpoint(!)
     def get(self, account_id):
@@ -42,7 +44,7 @@ class AccountResource(Resource):
 class AccountCreationResource(Resource):
     def __init__(self):
         super().__init__()
-        self.model = AccountModel()
+        self.model = _model
         self.parser = reqparse.RequestParser()
         self.parser.add_argument("first_name")
         self.parser.add_argument("last_name")
@@ -101,7 +103,7 @@ class AccountCreationResource(Resource):
 
 class AccountLoginResource(Resource):
     def __init__(self):
-        self.model = AccountModel()
+        self.model = _model
         self.parser = reqparse.RequestParser()
         self.parser.add_argument("username")
         self.parser.add_argument("password")
