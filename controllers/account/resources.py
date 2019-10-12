@@ -23,8 +23,7 @@ class AccountResource(Resource):
                 "message": "Account not found"
             }, 404
 
-        del account["password"]
-        return account
+        return account.dict
 
     def delete(self, account_id):
         success, account = self.model.delete_by_id(account_id)
@@ -108,6 +107,11 @@ class AccountLoginResource(Resource):
         self.parser.add_argument("username")
         self.parser.add_argument("password")
 
+    def get(self):
+        return {
+            "message": "Method not allowed"
+        }, 405
+
     def post(self):
         login_details = self.parser.parse_args()
         # FIXME: Proper display_name and username handling
@@ -121,10 +125,9 @@ class AccountLoginResource(Resource):
         # TODO: Make a JWT!
         authenticated, account = self.model.authenticate(username, password)
         if authenticated:
-            del account["password"]
             return {
                 "message": "Successfully authenticated",
-                "account": account
+                "account": account.dict
             }
         return {
             "message": "Failed to authenticate"
