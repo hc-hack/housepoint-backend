@@ -4,6 +4,70 @@ from uuid import uuid4
 from psycopg2 import sql
 from argon2.exceptions import VerifyMismatchError
 
+class account():
+    def __init__(self, accountData):
+        self.id = ""
+        self.username = ""
+        self.first_name= ""
+        self.last_name= ""
+        self.email = ""
+        self.ability_rating = ""
+        self.password = ""
+        self.changes = {}
+
+    def get_ID(self):
+        return self.id
+    def get_username(self):
+        return self.username
+    def get_first_name(self):
+        return self.first_name
+    def get_last_name(self):
+        return self.last_name
+    def get_email(self):
+        return self.email
+    def get_ability_rating(self):
+        return self.ability_rating
+    def get_password(self):
+        return self.password
+
+    def set_ID(self, accountData):             
+                                
+        if accountData[0] != None:
+            self.changes["id"]=accountData[0]
+    def set_username(self, accountData):
+        if accountData[1] != None:
+            self.changes["username"]=accountData[1]
+    def set_first_name(self, accountData):
+        if accountData[2] != None:
+            self.changes["first_name"]=accountData[2]
+    def set_last_name(self, accountData):
+        if accountData[3] != None:
+            self.changes["last_name"]=accountData[3]
+    def set_email(self, accountData):
+        if accountData[4] != None:
+            self.changes["email"]=accountData[4]
+    def set_ability_rating(self, accountData):
+        if accountData[5] != None:
+            self.changes["ability_rating"]=accountData[5]
+    def set_password(self, accountData):
+        if accountData[6] != None:
+            self.changes["password"]=accountData[6]
+    def commit(self):
+        if (self.changes.get("id") != None):
+            self.id = self.changes.get("id")
+        if (self.changes.get("username") != None):
+            self.username = self.changes.get("username")
+        if (self.changes.get("first_name") != None):
+            self.first_name = self.changes.get("first_name")
+        if (self.changes.get("last_name") != None):     
+            self.last_name = self.changes.get("last_name")
+        if (self.changes.get("email") != None):
+            self.email = self.changes.get("email")
+        if (self.changes.get("ability_rating") != None): 
+            self.ability_rating = self.changes.get("ability_rating")
+        if (self.changes.get("password") != None):
+            self.password = self.changes.get("password")
+
 
 class AccountModel(AbstractModel):
     ACCOUNT_ZIP = ["id", "username", "first_name",
