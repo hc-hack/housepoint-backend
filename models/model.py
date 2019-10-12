@@ -13,7 +13,7 @@ class AbstractModel():
     PASSWORD = "password"
     HOST = "localhost"
     PORT = 5432
-    DB_NAME = "hackathon_dev1"
+    DB_NAME = "hackathon_dev2"
 
     def __init__(self):
         self._make_database()
@@ -37,7 +37,7 @@ class AbstractModel():
         cursor = conn.cursor()
         try:
             cursor.execute(sql.SQL("CREATE DATABASE {}").format(
-                sql.Identifier(self.DB_NAME)))
+                sql.Identifier(self.DB_NAME), sql.Identifier(self.DB_NAME)))
         except lookup(DUPLICATE_DATABASE):
             # Allow a duplicate error!
             pass

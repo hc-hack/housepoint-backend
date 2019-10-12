@@ -129,7 +129,7 @@ class AccountModel(AbstractModel):
 
     def _ensure_tables(self):
         """
-        Ensure that the tables exist within the SQLite database
+        Ensure that the tables exist within PostgreSQL
         """
 
         cursor = self.conn.cursor()
